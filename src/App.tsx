@@ -1,4 +1,9 @@
 import "./index.css";
+import Home from "./componenets/pages/Home/Home";
 export default function App() {
-  return <div className="bg-red-500 w-[30px] h-[50px]"></div>;
+  return (
+    <div>
+      <Home />
+    </div>
+  );
 }
