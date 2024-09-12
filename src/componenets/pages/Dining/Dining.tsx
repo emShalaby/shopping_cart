@@ -1,3 +1,7 @@
+
 export default function Dining() {
-  return <div></div>;
+  return (
+    <div>
+    </div>
+  );
 }

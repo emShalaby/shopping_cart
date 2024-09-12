@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body,
+#root,
+html,
+#app {
+  width: 100vw;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
