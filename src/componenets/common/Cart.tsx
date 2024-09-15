@@ -42,7 +42,10 @@ export default function Cart({ isOpen, onClose, items }: ICart) {
           ))}
         </div>
         <div className="mb-5 mt-auto flex flex-col gap-3 p-3">
-          <button className="border-2 border-solid border-black bg-gray-300 text-black">
+          <button
+            className="border-2 border-solid border-black bg-gray-300 text-black"
+            onClick={onClose}
+          >
             Continue Shopping
           </button>
           <button className="bg-black text-white">Checkout</button>
