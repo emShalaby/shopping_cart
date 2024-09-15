@@ -3,13 +3,19 @@ import { Link, useLocation } from "react-router-dom";
 
 interface ICard {
   title: string;
-  price: string;
+  price: number;
   imageUrl: string;
   id: string;
   description: string;
 }
 
-export default function Card({ title, price, imageUrl, id,description }: ICard) {
+export default function Card({
+  title,
+  price,
+  imageUrl,
+  id,
+  description,
+}: ICard) {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const path = location.pathname;
@@ -17,7 +23,7 @@ export default function Card({ title, price, imageUrl, id,description }: ICard) 
     <Link
       className="flex flex-col gap-3 p-2"
       to={`${path}` + "/" + `${id}`}
-      state={{ title, price, imageUrl ,description}}
+      state={{ title, price, imageUrl, description, id }}
     >
       {isLoading && (
         <div className="absolute h-[200px] w-[300px] animate-pulse" />
@@ -30,7 +36,7 @@ export default function Card({ title, price, imageUrl, id,description }: ICard) 
       />
       <div className="flex justify-between gap-10">
         <p>{title}</p>
-        <p>{price}</p>
+        <p>${price}</p>
       </div>
     </Link>
   );

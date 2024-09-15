@@ -7,12 +7,19 @@ import Cart from "./Cart";
 export default function ShoppingPage() {
   const location = useLocation();
   const { state } = location;
-  const { title, price, imageUrl, description } = state || {};
+  const { title, price, imageUrl, description, id, quantity } = state || {};
   const [isLoading, setIsLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  function ToggleCart() {
+  const [inputValue, setInputValue] = useState(1);
+  function cartHandler() {
     setIsCartOpen(!isCartOpen);
+    setCartItems((prevdata) => {
+      return [
+        ...prevdata,
+        { title, price, imageUrl, description, id, quantity: inputValue },
+      ];
+    });
   }
   return (
     <div className="mt-10 flex w-full wide:justify-center">
@@ -32,14 +39,26 @@ export default function ShoppingPage() {
         <div className="m-2 flex w-[50%] flex-col gap-2 p-2 md:m-3 md:gap-5 md:p-5">
           <H1>{title}</H1>
           <p>{description}</p>
-          <H3>{price}</H3>
-          <input type="number" className="border-2 border-solid" />
-          <button className="bg-black text-white" onClick={ToggleCart}>
+          <H3>{`$${price}`}</H3>
+          <input
+            type="number"
+            className="border-2 border-solid"
+            min={1}
+            value={inputValue}
+            onChange={(e) => {
+              const value = e.currentTarget.value;
+
+              const numberValue =
+                value === "" ? 1 : Math.max(1, parseInt(value));
+              setInputValue(numberValue);
+            }}
+          />
+          <button className="bg-black text-white" onClick={cartHandler}>
             Add to cart
           </button>
         </div>
       </div>
-      <Cart isOpen={isCartOpen} onClose={ToggleCart} />
+      <Cart isOpen={isCartOpen} onClose={cartHandler} items={cartItems} />
     </div>
   );
 }
