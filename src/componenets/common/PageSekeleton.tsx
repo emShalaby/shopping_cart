@@ -20,9 +20,9 @@ export default function PageSkeleton({ fetchUrl, title }: IPageSekelton) {
     fetchItems();
   }, [fetchUrl]);
   return (
-    <div className="p-3">
+    <div className="p-5 wide:flex wide:flex-col wide:place-items-center mt-5">
       <H1>{`${title} FURNITURE`}</H1>
-      <div className="grid grid-cols-3 gap-24 p-6">
+      <div className="grid min-w-[1000px] grid-cols-3 gap-24 p-6">
         {items &&
           items.products.map((item) => (
             <Card
