@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import H1 from "./H1";
 import H3 from "./H3";
-
+import Cart from "./Cart";
 export default function Header() {
   const location = useLocation();
   const currentPath = location.pathname.toLowerCase();
