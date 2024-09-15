@@ -7,20 +7,34 @@ import Cart from "./Cart";
 export default function ShoppingPage() {
   const location = useLocation();
   const { state } = location;
-  const { title, price, imageUrl, description, id, quantity } = state || {};
+  const { title, price, imageUrl, description, id } = state || {};
   const [isLoading, setIsLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [inputValue, setInputValue] = useState(1);
+
   function cartHandler() {
     setIsCartOpen(!isCartOpen);
-    setCartItems((prevdata) => {
-      return [
+
+    // Check if the item already exists in the cart
+    const existingItemIndex = cartItems.findIndex((item) => item.id === id);
+
+    if (existingItemIndex !== -1) {
+      // If it exists, update the quantity
+      setCartItems((prevdata) => {
+        const updatedCartItems = [...prevdata];
+        updatedCartItems[existingItemIndex].quantity = inputValue; // Update quantity
+        return updatedCartItems;
+      });
+    } else {
+      // If it doesn't exist, add a new item with the current input value
+      setCartItems((prevdata) => [
         ...prevdata,
         { title, price, imageUrl, description, id, quantity: inputValue },
-      ];
-    });
+      ]);
+    }
   }
+
   return (
     <div className="mt-10 flex w-full wide:justify-center">
       <div className="flex gap-2">
@@ -47,18 +61,27 @@ export default function ShoppingPage() {
             value={inputValue}
             onChange={(e) => {
               const value = e.currentTarget.value;
-
               const numberValue =
                 value === "" ? 1 : Math.max(1, parseInt(value));
               setInputValue(numberValue);
             }}
           />
-          <button className="bg-black text-white" onClick={cartHandler}>
+          <button
+            className="bg-black text-white"
+            onClick={(e) => {
+              e.preventDefault();
+              cartHandler();
+            }}
+          >
             Add to cart
           </button>
         </div>
       </div>
-      <Cart isOpen={isCartOpen} onClose={cartHandler} items={cartItems} />
+      <Cart
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        items={cartItems}
+      />
     </div>
   );
 }

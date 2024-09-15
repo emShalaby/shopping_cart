@@ -12,7 +12,7 @@ export default function Cart({ isOpen, onClose, items }: ICart) {
       {isOpen && (
         <div
           onClick={onClose}
-          className="absolute top-0 z-40 h-full w-full bg-black bg-opacity-50"
+          className="absolute bottom-0 top-0 z-40 h-full w-full bg-black bg-opacity-50"
         />
       )}
       <div
@@ -40,6 +40,12 @@ export default function Cart({ isOpen, onClose, items }: ICart) {
               imageUrl={item.imageUrl}
             />
           ))}
+        </div>
+        <div className="mb-5 mt-auto flex flex-col gap-3 p-3">
+          <button className="border-2 border-solid border-black bg-gray-300 text-black">
+            Continue Shopping
+          </button>
+          <button className="bg-black text-white">Checkout</button>
         </div>
       </div>
     </>
