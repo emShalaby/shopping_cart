@@ -1,10 +1,6 @@
-import Card from "../../common/Card";
-import H1 from "../../common/H1";
+import PageSkeleton from "../../common/PageSekeleton";
+const fetchUrl = "https://dummyjson.com/products/category/furniture";
+const title = "LIVING ROOM";
 export default function Living() {
-  return (
-    <div className="p-3">
-      <H1>LIVING ROOM FURNITURE</H1>
-      <div className="grid"></div>
-    </div>
-  );
+  return PageSkeleton({ title, fetchUrl });
 }

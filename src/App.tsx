@@ -3,9 +3,9 @@ import Header from "./componenets/common/Header";
 
 export default function App() {
   return (
-    <div className="flex min-h-screen w-full flex-col">
+    <div className="">
       <Header />
-      <main className="w-full flex-grow">
+      <main className="w-full ">
         <Outlet />
       </main>
     </div>
