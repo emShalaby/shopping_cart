@@ -12,7 +12,7 @@ export default function Cart({ isOpen, onClose, items }: ICart) {
       {isOpen && (
         <div
           onClick={onClose}
-          className="absolute bottom-0 top-0 z-40 h-full w-full bg-black bg-opacity-50"
+          className="fixed bottom-0 top-0 z-40 h-full w-full bg-black bg-opacity-50"
         />
       )}
       <div
