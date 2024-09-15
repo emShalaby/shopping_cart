@@ -18,7 +18,7 @@ export default function Card({ title, price, imageUrl }: ICard) {
         alt={title}
         onLoad={() => setIsLoading(false)}
       />
-      <div className="flex gap-10 ustify-between">
+      <div className="flex gap-10 justify-between">
         <p>{title}</p>
         <p>{price}</p>
       </div>
