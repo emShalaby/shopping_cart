@@ -8,8 +8,8 @@ export default function Header() {
   const isActive = (path: string) => currentPath === `/${path.toLowerCase()}`;
 
   return (
-    <header className="w-screen border-b border-solid flex  border-gray-300 p-5 wide:justify-center">
-      <div className="flex w-full max-w-[2000px] items-center">
+    <header className="flex w-screen border-b border-solid border-gray-300 p-5 wide:justify-center">
+      <div className="flex w-full min-w-[600px] max-w-[2000px] items-center">
         <div className="flex items-center gap-4">
           <Link to="/" className="mr-5">
             <H1>CRIMSONAL</H1>
@@ -28,6 +28,9 @@ export default function Header() {
             ))}
           </nav>
         </div>
+        <button className="ml-auto mr-[3px] rounded-md bg-black px-2 py-1 text-white md:mr-[10px]">
+          CART
+        </button>
       </div>
     </header>
   );
