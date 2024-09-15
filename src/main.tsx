@@ -7,6 +7,7 @@ import Dining from "./componenets/pages/Dining/Dining";
 import Bedroom from "./componenets/pages/Bedroom/Bedroom";
 import Home from "./componenets/pages/Home/Home";
 import "./index.css";
+import ShoppingPage from "./componenets/common/ShoppingPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +28,18 @@ const router = createBrowserRouter([
       {
         path: "bedroom",
         element: <Bedroom />,
+      },
+      {
+        path: "living/:id",
+        element: <ShoppingPage />,
+      },
+      {
+        path: "dining/:id",
+        element: <ShoppingPage />,
+      },
+      {
+        path: "bedroom/:id",
+        element: <ShoppingPage />,
       },
     ],
   },

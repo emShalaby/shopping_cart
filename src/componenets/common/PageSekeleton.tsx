@@ -20,7 +20,7 @@ export default function PageSkeleton({ fetchUrl, title }: IPageSekelton) {
     fetchItems();
   }, [fetchUrl]);
   return (
-    <div className="p-5 wide:flex wide:flex-col wide:place-items-center mt-5">
+    <div className="mt-5 p-5 wide:flex wide:flex-col wide:place-items-center">
       <H1>{`${title} FURNITURE`}</H1>
       <div className="grid min-w-[1000px] grid-cols-3 gap-24 p-6">
         {items &&
@@ -30,6 +30,8 @@ export default function PageSkeleton({ fetchUrl, title }: IPageSekelton) {
               title={item.title}
               price={item.price}
               imageUrl={item.images[0]}
+              id={String(item.id)}
+              description={item.description}
             />
           ))}
       </div>
