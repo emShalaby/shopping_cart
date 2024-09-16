@@ -4,6 +4,6 @@ type CartItem = {
   description: string;
   imageUrl: string;
   price: number;
-  quantity?: number;
+  quantity: number;
 };
 export default CartItem;

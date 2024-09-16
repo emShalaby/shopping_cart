@@ -1,5 +1,7 @@
 import CartItem from "../../types/CartItems";
-import H1 from "./H1";
+type TMiniCard = CartItem & {
+  onDelete: React.MouseEventHandler<HTMLButtonElement> | undefined;
+};
 export default function MiniCard({
   imageUrl,
   price,
@@ -7,7 +9,8 @@ export default function MiniCard({
   title,
   id,
   description,
-}: CartItem) {
+  onDelete,
+}: TMiniCard) {
   return (
     <div className="m-3 flex gap-2 border-b-2 p-2">
       <div className="flex-1">
@@ -18,7 +21,9 @@ export default function MiniCard({
         <p>{`Quantity: ${quantity}`}</p>
       </div>
       <div className="flex-2 flex flex-col justify-between">
-        <button className="self-end font-bold">X</button>
+        <button className="self-end font-bold" onClick={() => onDelete(id)}>
+          X
+        </button>
 
         <p>{`$${price}`}</p>
       </div>

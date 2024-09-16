@@ -3,36 +3,25 @@ import { useState } from "react";
 import H1 from "./H1";
 import H3 from "./H3";
 import Cart from "./Cart";
+import { useCart } from "../../context/CartContext";
 
 export default function ShoppingPage() {
   const location = useLocation();
   const { state } = location;
   const { title, price, imageUrl, description, id } = state || {};
   const [isLoading, setIsLoading] = useState(true);
-  const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [inputValue, setInputValue] = useState(1);
-
+  const { addToCart } = useCart();
   function cartHandler() {
-    setIsCartOpen(!isCartOpen);
-
-    // Check if the item already exists in the cart
-    const existingItemIndex = cartItems.findIndex((item) => item.id === id);
-
-    if (existingItemIndex !== -1) {
-      // If it exists, update the quantity
-      setCartItems((prevdata) => {
-        const updatedCartItems = [...prevdata];
-        updatedCartItems[existingItemIndex].quantity = inputValue; // Update quantity
-        return updatedCartItems;
-      });
-    } else {
-      // If it doesn't exist, add a new item with the current input value
-      setCartItems((prevdata) => [
-        ...prevdata,
-        { title, price, imageUrl, description, id, quantity: inputValue },
-      ]);
-    }
+    addToCart({
+      id,
+      title,
+      price,
+      imageUrl,
+      description,
+      quantity: inputValue,
+    });
   }
 
   return (
@@ -71,17 +60,14 @@ export default function ShoppingPage() {
             onClick={(e) => {
               e.preventDefault();
               cartHandler();
+              setIsCartOpen(true);
             }}
           >
             Add to cart
           </button>
         </div>
       </div>
-      <Cart
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-      />
+      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import Bedroom from "./componenets/pages/Bedroom/Bedroom";
 import Home from "./componenets/pages/Home/Home";
 import "./index.css";
 import ShoppingPage from "./componenets/common/ShoppingPage";
+import { CartProvider } from "./context/CartContext";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,7 +49,9 @@ const root = document.getElementById("root");
 if (root) {
   ReactDOM.createRoot(root).render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
     </StrictMode>,
   );
 }

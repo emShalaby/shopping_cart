@@ -1,12 +1,13 @@
 import H1 from "./H1";
 import MiniCard from "./MiniCard";
 import CartItem from "../../types/CartItems";
+import { useCart } from "../../context/CartContext";
 interface ICart {
   isOpen: boolean;
   onClose: () => void;
-  items: CartItem[];
 }
-export default function Cart({ isOpen, onClose, items }: ICart) {
+export default function Cart({ isOpen, onClose }: ICart) {
+  const { cartItems, removeFromCart } = useCart();
   return (
     <>
       {isOpen && (
@@ -29,7 +30,7 @@ export default function Cart({ isOpen, onClose, items }: ICart) {
           </button>
         </div>
         <div>
-          {items.map((item) => (
+          {cartItems.map((item: CartItem) => (
             <MiniCard
               key={item.id}
               price={item.price}
@@ -38,6 +39,7 @@ export default function Cart({ isOpen, onClose, items }: ICart) {
               description={item.description}
               id={item.id}
               imageUrl={item.imageUrl}
+              onDelete={removeFromCart}
             />
           ))}
         </div>
