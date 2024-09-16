@@ -2,12 +2,20 @@ import H1 from "./H1";
 import MiniCard from "./MiniCard";
 import CartItem from "../../types/CartItems";
 import { useCart } from "../../context/CartContext";
+import { useMemo } from "react";
 interface ICart {
   isOpen: boolean;
   onClose: () => void;
 }
 export default function Cart({ isOpen, onClose }: ICart) {
   const { cartItems, removeFromCart } = useCart();
+  const totalPrice = useMemo(() => {
+    return cartItems.reduce(
+      (total: number, product: CartItem) =>
+        total + product.price * product.quantity,
+      0,
+    );
+  }, [cartItems]);
   return (
     <>
       {isOpen && (
@@ -44,6 +52,10 @@ export default function Cart({ isOpen, onClose }: ICart) {
           ))}
         </div>
         <div className="mb-5 mt-auto flex flex-col gap-3 p-3">
+          <div className="flex justify-between">
+            <p>Subtotal</p>
+            <p className="text-lg font-bold">{`$${totalPrice}`}</p>
+          </div>
           <button
             className="border-2 border-solid border-black bg-gray-300 text-black"
             onClick={onClose}

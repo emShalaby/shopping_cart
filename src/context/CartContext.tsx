@@ -12,7 +12,11 @@ export interface CartItem {
 
 const CartContext = createContext(null);
 
-export const CartProvider = ({ children }) => {
+export const CartProvider = ({
+  children,
+}: {
+  children: React.ReactElement;
+}) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const addToCart = (item: CartItem) => {
